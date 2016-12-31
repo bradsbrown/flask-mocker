@@ -1,0 +1,22 @@
+{
+        "users": [
+            {
+                "name": "Ben",
+                "id": 0
+                },
+            {
+                "name": "Suzanne",
+                "id": 1
+                }
+            ],
+        "jobs": [
+            {
+                "title": "accountant",
+                "id": 0
+                },
+            {
+                "title": "janitor",
+                "id": 1
+                }
+            ]
+        }

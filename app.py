@@ -1,3 +1,7 @@
+import os
+import sys
+import json
+
 from flask import Flask, request, abort
 from flask_restful import Resource, Api
 
@@ -5,28 +9,19 @@ app = Flask(__name__)
 api = Api(app)
 
 
-data = {
-        "users": [
-            {
-                "name": "Ben",
-                "id": 0
-                },
-            {
-                "name": "Suzanne",
-                "id": 1
-                }
-            ],
-        "jobs": [
-            {
-                "title": "accountant",
-                "id": 0
-                },
-            {
-                "title": "janitor",
-                "id": 1
-                }
-            ]
-        }
+if len(sys.argv) < 2:
+    raise ValueError("No .json filename provided --> 'python app.py <filename>.json'")
+
+
+file = sys.argv[1]
+
+
+if not os.path.exists(file):
+    raise FileNotFoundError("File '{}' not found!".format(file))
+
+
+with open(file, 'r') as f:
+    data = json.load(f)
 
 
 class Item(Resource):
@@ -43,7 +38,9 @@ class Item(Resource):
 
     def put(self, category, id_):
         idx = self._get_index_by_id(category, id_)
-        data[category][idx].update(request.form.to_dict())
+        put_data = request.form.to_dict()
+        put_data.pop('id')
+        data[category][idx].update(put_data)
         return data[category][idx]
 
     def delete(self, category, id_):
