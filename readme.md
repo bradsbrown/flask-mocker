@@ -13,7 +13,12 @@ It never writes to your file, so each new instance of your server starts with a 
 * Clone this repo into your directory (`git clone https://github.com/bradsbrown/flask-mocker.git`)
 * You can modify the data.json file if you'd like, or create your own, but you can just use the demo provided
     * Make sure to keep it in the same directory as the app
-* CD into the directory (`cd flask-mocker`) and run the app from the command line, pasing it your data file name (`python app.py data.json`)
+* CD into the directory (`cd flask-mocker`) before running the app
+
+## Running the app
+You can call the app as simply as `python app.py <file name>`, but there are optional arguments you can pass as well:
+* `-p` or `--port` followed by a port number will run the server on the port of your choosing
+* `--debug` will run the server in debug mode for additional information on issue tracing
 
 ## Operations and Endpoints
 The supported enddpoints and operations are:
