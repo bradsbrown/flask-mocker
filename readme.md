@@ -22,6 +22,7 @@ You can call the app as simply as `python app.py <file name>`, but there are opt
 
 ## Operations and Endpoints
 **Note: default port is 5000**
+
 The supported enddpoints and operations are:
 ### Root (`http://localhost:<port>`, henceforth referred to as `/`)
 * GET - returns the full JSON data object
