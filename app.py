@@ -54,7 +54,10 @@ class Item(Resource):
 
 class Category(Resource):
     def _next_id(self, category):
-        return max(item['id'] for item in data[category]) + 1
+        try:
+            return max(item['id'] for item in data[category]) + 1
+        except TypeError:
+            return 0
 
     def get(self, category):
         return data[category]
