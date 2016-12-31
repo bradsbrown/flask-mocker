@@ -11,12 +11,11 @@ parser.add_argument('-p', '--port', help='the port number for the server to run'
 parser.add_argument('file', help='the name of your JSON data file')
 parser.add_argument('--debug', dest='debug', action='store_true',
                     help='this runs the app in debug mode')
-parser.set_defaults(debug=False)
+parser.set_defaults(debug=False, port=5000)
 
 
 args = parser.parse_args()
 file = args.file
-port = args.port or 5000
 
 app = Flask(__name__)
 api = Api(app)
@@ -88,4 +87,4 @@ api.add_resource(Item, '/<string:category>/<int:id_>')
 
 
 if __name__ == '__main__':
-    app.run(port=port, debug=args.debug)
+    app.run(port=args.port, debug=args.debug)
