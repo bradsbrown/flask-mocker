@@ -1,19 +1,24 @@
+import argparse
 import os
-import sys
 import json
 
 from flask import Flask, request, abort
 from flask_restful import Resource, Api
 
+
+parser = argparse.ArgumentParser(description="Parameters for flask-mocker")
+parser.add_argument('-p', '--port', help='the port number for the server to run')
+parser.add_argument('file', help='the name of your JSON data file')
+parser.add_argument('--debug', dest='debug', action='store_true',
+                    help='this runs the app in debug mode')
+parser.set_defaults(debug=False, port=5000)
+
+
+args = parser.parse_args()
+file = args.file
+
 app = Flask(__name__)
 api = Api(app)
-
-
-if len(sys.argv) < 2:
-    raise ValueError("No .json filename provided --> 'python app.py <filename>.json'")
-
-
-file = sys.argv[1]
 
 
 if not os.path.exists(file):
@@ -27,7 +32,7 @@ with open(file, 'r') as f:
 class Item(Resource):
     def _get_index_by_id(self, category, id_):
         try:
-            idx = next(i for i,j in enumerate(data[category]) if j['id'] == id_)
+            idx = next(i for i, j in enumerate(data[category]) if j['id'] == id_)
         except StopIteration:
             abort(404)
         return idx
@@ -82,4 +87,4 @@ api.add_resource(Item, '/<string:category>/<int:id_>')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=args.port, debug=args.debug)
