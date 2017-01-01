@@ -17,6 +17,7 @@ It never writes to your file, so each new instance of your server starts with a 
 
 ## Running the app
 You can call the app as simply as `python app.py <file name>`, but there are optional arguments you can pass as well:
+`python app.py [-p PORT] [--debug] <file name>`
 * `-p` or `--port` followed by a port number will run the server on the port of your choosing
 * `--debug` will run the server in debug mode for additional information on issue tracing
 
