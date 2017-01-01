@@ -1,7 +1,7 @@
-# if venv not activated, create one and source it
+# verify virtualenv is installed and active
 if [[ -z "$VIRTUAL_ENV" ]]; then
-    virtualenv MOCKER
-    source MOCKER/bin/activate
+    echo "No virtualenvironment detected. Please set up and activate a virtualenv."
+    exit
 fi
 
 # install flask-restful (includes base flask)
