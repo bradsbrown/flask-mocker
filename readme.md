@@ -9,11 +9,11 @@ It never writes to your file, so each new instance of your server starts with a 
 * Create your directory (`mkdir flask-mocker`) and cd into it (`cd flask-mocker`)
 * Set up a virtual environment (`virutalenv MOCKER`)
 * Activate your virtualenvironment (`source MOCKER/bin/activate`)
-* Install flask and flask-restful (`pip install flask`, `pip install flask-restful`)
 * Clone this repo into your directory (`git clone https://github.com/bradsbrown/flask-mocker.git`)
+* CD into the directory (`cd flask-mocker`)
+* run the setup script (`./setup.sh`)
 * You can modify the data.json file if you'd like, or create your own, but you can just use the demo provided
     * Make sure to keep it in the same directory as the app
-* CD into the directory (`cd flask-mocker`) before running the app
 
 ## Running the app
 You can call the app as simply as `python app.py <file name>`, but there are optional arguments you can pass as well:
