@@ -15,17 +15,17 @@ parser.set_defaults(debug=False, port=5000)
 
 
 args = parser.parse_args()
-file = args.file
+filename = args.file
 
 app = Flask(__name__)
 api = Api(app)
 
 
-if not os.path.exists(file):
-    raise FileNotFoundError("File '{}' not found!".format(file))
+if not os.path.exists(filename):
+    raise FileNotFoundError("File '{}' not found!".format(filename))
 
 
-with open(file, 'r') as f:
+with open(filename, 'r') as f:
     data = json.load(f)
 
 
