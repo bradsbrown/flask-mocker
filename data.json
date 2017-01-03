@@ -1,22 +1,18 @@
 {
-        "users": [
-            {
-                "name": "Ben",
-                "id": 0
+        "users": {
+            "70563f4b-fe07-4f57-984a-ae1fa1b7eb27": {
+                "name": "Ben"
                 },
-            {
-                "name": "Suzanne",
-                "id": 1
+            "3213a7bf-fc37-4444-bd5b-950e1374992b": {
+                "name": "Suzanne"
                 }
-            ],
-        "jobs": [
-            {
-                "title": "accountant",
-                "id": 0
+        },
+        "jobs": {
+            "511bd98e-8448-4c21-9612-8d59d12bcee2": {
+                "title": "accountant"
                 },
-            {
-                "title": "janitor",
-                "id": 1
+            "3b494508-810f-4af0-accc-f07a0e794827": {
+                "title": "janitor"
                 }
-            ]
+            }
         }

@@ -1,6 +1,7 @@
 import argparse
-import os
 import json
+import os
+import uuid
 
 from flask import Flask, request, abort
 from flask_restful import Resource, Api
@@ -30,46 +31,34 @@ with open(filename, 'r') as f:
 
 
 class Item(Resource):
-    def _get_index_by_id(self, category, id_):
-        try:
-            idx = next(i for i, j in enumerate(data[category]) if j['id'] == id_)
-        except StopIteration:
-            abort(404)
-        return idx
-
     def get(self, category, id_):
-        idx = self._get_index_by_id(category, id_)
-        return data[category][idx]
+        if id_ not in data[category]:
+            abort(404)
+        return data[category][id_]
 
     def put(self, category, id_):
-        idx = self._get_index_by_id(category, id_)
+        if id_ not in data[category]:
+            abort(404)
         put_data = request.form.to_dict()
-        put_data.pop('id')
-        data[category][idx].update(put_data)
-        return data[category][idx]
+        data[category][id_].update(put_data)
+        return data[category][id_]
 
     def delete(self, category, id_):
-        idx = self._get_index_by_id(category, id_)
-        del data[category][idx]
-        return {'status': 'Delete Successful!'}
+        del data[category][id_]
+        return {'message': 'Delete Successful!'}
 
 
 class Category(Resource):
-    def _next_id(self, category):
-        try:
-            return max(item['id'] for item in data[category]) + 1
-        except TypeError:
-            return 0
-
     def get(self, category):
+        if category not in data:
+            abort(404)
         return data[category]
 
     def post(self, category):
-        id_ = self._next_id(category)
+        id_ = str(uuid.uuid4())
         post_data = request.form.to_dict()
-        post_data.update(id=id_)
-        data[category].append(post_data)
-        return post_data
+        data[category][id_] = post_data
+        return {id_: data[category][id_]}
 
 
 class Categories(Resource):
@@ -83,7 +72,7 @@ api.add_resource(Categories, '/')
 api.add_resource(Category, '/<string:category>')
 
 
-api.add_resource(Item, '/<string:category>/<int:id_>')
+api.add_resource(Item, '/<string:category>/<string:id_>')
 
 
 if __name__ == '__main__':
